@@ -1,4 +1,5 @@
 import ControlledCheckbox from "./UpdateTask/CheckBox";
+
 import useStyles from "./style";
 
 function TodoItems({ title, id, status, onUpdatePost, posts }: any) {
@@ -16,7 +17,7 @@ function TodoItems({ title, id, status, onUpdatePost, posts }: any) {
         <p>{title}</p>
       </div>
 
-      <p>Status: {status ? "SUCCESS" : "ERROR"} </p>
+
     </>
   );
 }

@@ -9,7 +9,6 @@ import Home from "./container/Home";
 
 const theme = createTheme({});
 function App() {
-  const history = useHistory();
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (!token) {
