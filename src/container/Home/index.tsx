@@ -55,17 +55,10 @@ function HomePage() {
     setPosts(newPosts);
   };
 
-  const handleDelete = async (id: any) => {
-    const newPosts = [...posts];
-
-    newPosts.splice(id, 1);
+  const handleDelete = (id: any) => {
+    const newPosts = posts.filter((item) => item._id !== id);
     setPosts(newPosts);
-
-    try {
-      await deleteTask(id);
-    } catch (error) {
-      console.log("error", error);
-    }
+    deleteTask(id);
   };
 
   useEffect(() => {
@@ -80,7 +73,6 @@ function HomePage() {
       );
       setChecked(false);
       setPosts(data.data.data);
-      return data;
     }
     getListTask();
   }, [pageCount, itemNumber, isAdd]);

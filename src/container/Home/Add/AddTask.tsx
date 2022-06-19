@@ -1,15 +1,12 @@
 import { useState } from "react";
 
-import { Button } from "@mui/material";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import { Box } from "@mui/system";
-
 import TransitionAlertsSuccess from "../Alert/AlertSuccess";
 import TransitionAlertsError from "../Alert/AlertError";
 import { postTask } from "./until";
 import Loading from "../Loading";
 
 import useStyles from "../style";
+import ButtonReuse from "../ButtonComponent/ButtonReuse";
 
 function AddTask({ onAddTask, posts, task }: any) {
   const [error, setError] = useState(false);
@@ -34,13 +31,9 @@ function AddTask({ onAddTask, posts, task }: any) {
   return (
     <>
       <div>{checked && <Loading />}</div>
+      
+      <ButtonReuse action={handleAdd} styleClass={classes.addBtn} />
 
-      <Button onClick={handleAdd} className={classes.addBtn}>
-        <Box display="flex" alignItems="center">
-          <AddBoxIcon />
-          <p>Add New Task</p>
-        </Box>
-      </Button>
       {success && <TransitionAlertsSuccess />}
       {error && <TransitionAlertsError />}
     </>
