@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const postTask = async (description: any) => {
-  const res = await axios.post(
-    "https://api-nodejs-todolist.herokuapp.com/task",
+export const updateTask = async (id: any, status: any) => {
+  const res = await axios.put(
+    `https://api-nodejs-todolist.herokuapp.com/task/${id}`,
     {
-      description: description,
+      completed: status,
     },
     {
       headers: {
@@ -13,5 +13,6 @@ export const postTask = async (description: any) => {
       },
     }
   );
+
   return res;
 };

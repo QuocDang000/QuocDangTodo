@@ -1,19 +1,18 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
-import useStyles from './style';
+import ControlledCheckbox from "./UpdateTask/CheckBox";
 
-function TodoItems(props) {
-    const classes = useStyles();
+import useStyles from "./style";
 
-    const {title ,handleDelete} = props
+function TodoItems({ title, ...props }: any) {
+  const classes = useStyles();
 
-    return (
-        <div className={classes.item}>
-            <DeleteIcon onClick={handleDelete}/>
-            <CheckBoxOutlinedIcon />
-            <p>{title}</p>
-        </div>
-    )
+  return (
+    <>
+      <div className={classes.item}>
+        <ControlledCheckbox {...props} />
+        <p>{title}</p>
+      </div>
+    </>
+  );
 }
 
-export default TodoItems
+export default TodoItems;

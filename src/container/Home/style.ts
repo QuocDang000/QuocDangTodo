@@ -1,102 +1,126 @@
-import { Margin } from "@mui/icons-material";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
-    header: {
-        textAlign: "center",
-        alignItems: "center",
+  header: {
+    textAlign: "center",
+    alignItems: "center",
+  },
+
+  body: {
+    height: "650px",
+    overflow: "auto",
+  },
+
+  modal: {
+    backgroundColor: "#dcd4d4",
+    position: "fixed",
+    height: "100%",
+    width: "100%",
+  },
+
+  content: {},
+
+  taskState: {
+    color: "#df0606",
+    fontWeight: "400",
+    fontSize: "17px",
+  },
+
+  title: {
+    fontWeight: "bolder",
+    fontSize: "xxx-large",
+    opacity: "0.6",
+  },
+
+  wrapper: {
+    position: "relative",
+  },
+
+  logOutBtn: {
+    border: "none",
+    background: "#fff",
+  },
+
+  logOut: {
+    fontSize: "20px",
+    fontWeight: 600,
+    color: "#d146cf",
+  },
+
+  addBtn: {
+    color: "#333",
+    display: "flex",
+    padding: "0px 10px",
+    background: "#fff",
+    alignItems: "center",
+    border: "solid 1px #000",
+    marginTop: "10px",
+    backgroundColor: "#f9f9f9",
+    "&:hover": {
+      backgroundColor: "#3e90df",
     },
+  },
 
-    body: {
-        height: "650px",
-        overflow: "auto"
+  item: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "-20px"
+  },
+
+  li: {
+    marginTop: "150px",
+  },
+
+  liItem: {
+    listStyle: "none",
+  },
+
+  controlPage: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
+
+  loadingBtn: {
+    position: "absolute",
+    zIndex: "2",
+    border: "none",
+    width: "100vw",
+    height: "100vh", 
+  },
+
+  itemNumber: {},
+
+  controlBtn: {
+    marginRight: "15px",
+  },
+
+  notiContent: {
+    color: "#e01010",
+  },
+
+  iconDelete: {
+    color: "#000",
+    "&:hover": {
+      color: "red",
     },
+  },
 
-    modal: {
-        backgroundColor: "#dcd4d4",
-        position: "fixed",
-        height: "100%",
-        width: "100%",
-    },
+  status: {
+    margin: "-16px 20px 30px",
+    color: "red",
+  },
 
-    content: {
+  textFieldBox: {
+    position: "fixed",
+    zIndex: 1,
+    top: "140px",
+    left: "50px",
+  },
 
-    },
+  textField: {
+    backgroundColor: "#f9f9f9",
+  },
+}));
 
-    taskState: {
-        color: "#df0606",
-        fontWeight: "400",
-        fontSize: "17px",
-    },
-
-    title: {
-        fontWeight: "bolder",
-        fontSize: "xxx-large",
-        opacity: "0.6",
-    },
-
-    wrapper: {
-        position: "relative"
-    },
-
-    logOutBtn: {
-        border: "none",
-        background: "#fff"
-    },
-
-    logOut: {
-        fontSize: "20px",
-        fontWeight: 600,
-        color: "#d146cf",
-    },
-
-    addBtn: {
-        display: "flex",
-        alignItems: "center",
-        border: "none",
-        background: "#fff"
-    },
-
-    item: {
-        display: "flex",
-        alignItems: "center"
-    },
-
-    li: {
-        listStyle: "none"
-    },
-
-    controlPage: {
-        display: "flex",
-        justifyContent: "flex-end",
-        alignItems: "center",
-    },
-
-    loadingBtn: {
-        // marginTop: "30px",
-        position: "fixed",
-        zIndex: "2",
-        // alignItems: "center",
-        border: "none",
-        width: "100vw",
-        height: "100vh",
-        margin: "20px"
-    },
-
-    itemNumber: {
-    //    position: "fixed",
-    //     zIndex: "1",
-        // marginBottom: "40px"
-    },
-
-    controlBtn: {
-        marginRight: "15px"
-    },
-
-    notiContent: {
-        color: "#e01010"
-    }
-
-}))
-
-export default useStyles
+export default useStyles;

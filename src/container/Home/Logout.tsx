@@ -1,18 +1,11 @@
-import Box from "@mui/system/Box/Box";
-import { useState } from "react";
-import { getApi } from "../Login/until";
-import useStyles from "./style";
-import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Button from "@mui/material/Button";
+
+import useStyles from "./style";
 
 function Logout() {
   const classes = useStyles();
-//   const [checked, setChecked] = useState(true);
-  let history = useHistory();
-//   console.log(checked);
-//   useEffect(() => {
-//     checked && localStorage.removeItem("token");
-//   });
+  const history = useHistory();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -20,14 +13,14 @@ function Logout() {
   };
 
   return (
-    <Box>
-      <button className={classes.logOutBtn} onClick={handleLogout}>
-        <p className={classes.logOut}> Logout</p>
-      </button>
-    </Box>
+    <Button
+      variant="contained"
+      className={classes.logOutBtn}
+      onClick={handleLogout}
+    >
+      <p className={classes.logOut}> Logout</p>
+    </Button>
   );
 }
 
 export default Logout;
-
-// export function import { json } from 'stream/consumers';
