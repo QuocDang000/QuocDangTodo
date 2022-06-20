@@ -1,5 +1,7 @@
 import * as React from "react";
+
 import Checkbox from "@mui/material/Checkbox";
+
 import { updateTask } from "./until";
 
 export default function ControlledCheckbox({
@@ -10,30 +12,15 @@ export default function ControlledCheckbox({
 }: any) {
   const [checked, setChecked] = React.useState(status);
 
-  const handleChangeCheckBox = async (e) => {
+  const handleChangeCheckBox = (e) => {
     setChecked(e.target.checked);
 
-    const newPosts = posts.map(post => {
-      if (post._id === id) {
-        if (post.completed === false) {
-          post.completed = true 
-          status = post.completed 
-        } else {
-          post.completed = false 
-          status = post.completed
-        }
-        console.log("abcd");
-      } 
-      return post
+    const newPosts = posts.map((post) => {
+      return post._id === id ? {...post , completed: e.target.checked} : post
     });
-    
+
     onUpdatePost(newPosts);
-    try {
-      await updateTask(id, status);
-    } catch (error) {
-      console.log("error", error);
-    }
-    console.log("statusss", status);
+    updateTask(id, e.target.checked);
   };
 
   return (

@@ -56,23 +56,23 @@ const useStyles = makeStyles(() => ({
     border: "solid 1px #000",
     marginTop: "10px",
     backgroundColor: "#f9f9f9",
-    '&:hover': {
-        backgroundColor: "#3e90df"
-    }
+    "&:hover": {
+      backgroundColor: "#3e90df",
+    },
   },
 
   item: {
     display: "flex",
     alignItems: "center",
+    marginLeft: "-20px"
   },
 
   li: {
-    marginTop: "150px"
+    marginTop: "150px",
   },
 
   liItem: {
     listStyle: "none",
-
   },
 
   controlPage: {
@@ -82,12 +82,11 @@ const useStyles = makeStyles(() => ({
   },
 
   loadingBtn: {
-    position: "fixed",
+    position: "absolute",
     zIndex: "2",
     border: "none",
     width: "100vw",
-    height: "100vh",
-    margin: "20px",
+    height: "100vh", 
   },
 
   itemNumber: {},
@@ -102,13 +101,14 @@ const useStyles = makeStyles(() => ({
 
   iconDelete: {
     color: "#000",
-    '&:hover': {
-        color: "red"
-    }
+    "&:hover": {
+      color: "red",
+    },
   },
 
   status: {
-
+    margin: "-16px 20px 30px",
+    color: "red",
   },
 
   textFieldBox: {
@@ -119,10 +119,8 @@ const useStyles = makeStyles(() => ({
   },
 
   textField: {
-    backgroundColor: "#f9f9f9"
-  }
-
-
+    backgroundColor: "#f9f9f9",
+  },
 }));
 
 export default useStyles;

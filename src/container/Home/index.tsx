@@ -1,19 +1,24 @@
 import { useState, useEffect } from "react";
-import { Grid, Box, Button, IconButton, TextField } from "@mui/material";
+
+import {
+  Grid,
+  Box,
+  IconButton,
+  TextField,
+  TablePagination,
+  Skeleton,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import TablePagination from "@mui/material/TablePagination";
 import PanToolIcon from "@mui/icons-material/PanTool";
-import Skeleton from "@mui/material/Skeleton";
-import LoadingButton from "./Loading";
+import axios from "axios";
+
+import Loading from "./Loading";
 import AddTask from "./Add/AddTask";
-import { postTask } from "./Add/until";
-import TransitionAlertsError from "./Alert/AlertError";
-import TransitionAlertsSuccess from "./Alert/AlertSuccess";
 import { deleteTask } from "./Delete/until";
-import useStyles from "./style";
 import TodoItem from "./TodoItems";
 import Logout from "./Logout";
-import axios from "axios";
+
+import useStyles from "./style";
 
 function HomePage() {
   const classes = useStyles();
@@ -22,8 +27,6 @@ function HomePage() {
   const [checked, setChecked] = useState(true);
   const [itemNumber, setItemNumber] = useState(10);
   const [task, setTask] = useState("");
-  const [error, setError] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
 
   const handleChangePage = (
@@ -46,30 +49,16 @@ function HomePage() {
     setIsAdd(true);
     setTask("");
     setPosts(listPost);
-
-    try {
-      await postTask(task);
-      setSuccess(true);
-    } catch (error) {
-      setError(true);
-    }
   };
 
   const handleUpdatePost = (newPosts) => {
     setPosts(newPosts);
   };
 
-  const handleDelete = async (id: any) => {
-    const newPosts = [...posts];
-
-    newPosts.splice(id, 1);
+  const handleDelete = (id: any) => {
+    const newPosts = posts.filter((item) => item._id !== id);
     setPosts(newPosts);
-
-    try {
-      await deleteTask(id);
-    } catch (error) {
-      console.log("error", error);
-    }
+    deleteTask(id);
   };
 
   useEffect(() => {
@@ -84,14 +73,13 @@ function HomePage() {
       );
       setChecked(false);
       setPosts(data.data.data);
-      return data;
     }
     getListTask();
   }, [pageCount, itemNumber, isAdd]);
 
   return (
     <div>
-      <div>{checked && <LoadingButton />}</div>
+      <div>{checked && <Loading />}</div>
 
       <Grid className={classes.header} container spacing={3}>
         <Grid item xs={4}>
@@ -101,7 +89,7 @@ function HomePage() {
                 Hi Shobhit
                 <PanToolIcon />
               </h3>
-              <p className={classes.taskState}>4 tasks pending</p>
+              <p className={classes.taskState}>{itemNumber} tasks pending</p>
             </div>
           </Box>
         </Grid>
@@ -137,8 +125,6 @@ function HomePage() {
             </Box>
 
             <AddTask onAddTask={handleAddTask} posts={posts} task={task} />
-            {success && <TransitionAlertsSuccess />}
-            {error && <TransitionAlertsError />}
           </div>
           <ul>
             <div className={classes.li}>
@@ -165,7 +151,11 @@ function HomePage() {
                         status={post.completed}
                         onUpdatePost={handleUpdatePost}
                         posts={posts}
-                      ></TodoItem>
+                      />
+                    </div>
+
+                    <div className={classes.status}>
+                      <p>Status: {post.completed ? "Done" : "Pending"} </p>
                     </div>
                   </li>
                 )
