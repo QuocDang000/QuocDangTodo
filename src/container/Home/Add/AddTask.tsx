@@ -4,9 +4,9 @@ import TransitionAlertsSuccess from "../Alert/AlertSuccess";
 import TransitionAlertsError from "../Alert/AlertError";
 import { postTask } from "./until";
 import Loading from "../Loading";
+import ButtonComponent from "../ButtonComponent/ButtonReuse";
 
 import useStyles from "../style";
-import ButtonReuse from "../ButtonComponent/ButtonReuse";
 
 function AddTask({ onAddTask, posts, task }: any) {
   const [error, setError] = useState(false);
@@ -31,8 +31,8 @@ function AddTask({ onAddTask, posts, task }: any) {
   return (
     <>
       <div>{checked && <Loading />}</div>
-      
-      <ButtonReuse action={handleAdd} styleClass={classes.addBtn} />
+
+      <ButtonComponent action={handleAdd} styleClass={classes.addBtn} />
 
       {success && <TransitionAlertsSuccess />}
       {error && <TransitionAlertsError />}
