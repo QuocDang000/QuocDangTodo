@@ -2,25 +2,12 @@ import * as React from "react";
 
 import Checkbox from "@mui/material/Checkbox";
 
-import { updateTask } from "./until";
-
-export default function ControlledCheckbox({
-  id,
-  status,
-  onUpdatePost,
-  posts,
-}: any) {
+export default function ControlledCheckbox({ id, status, onUpdatePost }: any) {
   const [checked, setChecked] = React.useState(status);
 
   const handleChangeCheckBox = (e) => {
     setChecked(e.target.checked);
-
-    const newPosts = posts.map((post) => {
-      return post._id === id ? {...post , completed: e.target.checked} : post
-    });
-
-    onUpdatePost(newPosts);
-    updateTask(id, e.target.checked);
+    onUpdatePost(id, e.target.checked);
   };
 
   return (

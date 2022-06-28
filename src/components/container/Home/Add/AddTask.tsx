@@ -1,38 +1,31 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import TransitionAlertsSuccess from "../Alert/AlertSuccess";
 import TransitionAlertsError from "../Alert/AlertError";
-import { postTask } from "./until";
 import Loading from "../Loading";
-import ButtonComponent from "../ButtonComponent/ButtonReuse";
-
+import ButtonReuse from "../ButtonComponent/ButtonReuse";
+import { todoListSelector } from "../../../../redux/selector";
 import useStyles from "../style";
 
-function AddTask({ onAddTask, posts, task }: any) {
+function AddTask({ onAddTask, task }: any) {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [checked, setChecked] = useState(false);
+  const dispatch = useDispatch();
+
+  const todoList = useSelector(todoListSelector);
 
   const classes = useStyles();
-  const handleAdd = async () => {
-    setChecked(true);
-    try {
-      const res = await postTask(task);
-      const listBox = [res.data.data, ...posts];
-      onAddTask(listBox);
-      setSuccess(true);
-      setChecked(false);
-    } catch (error) {
-      setError(true);
-      setChecked(false);
-    }
+  const handleAdd = () => {
+    onAddTask(task);
   };
 
   return (
     <>
       <div>{checked && <Loading />}</div>
 
-      <ButtonComponent action={handleAdd} styleClass={classes.addBtn} />
+      <ButtonReuse action={handleAdd} styleClass={classes.addBtn} />
 
       {success && <TransitionAlertsSuccess />}
       {error && <TransitionAlertsError />}

@@ -3,7 +3,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 
 import useStyles from "../style";
 
-export default function ButtonComponent({ action, styleClass }: any) {
+export default function ButtonReuse({ action, styleClass }: any) {
   const classes = useStyles();
 
   return (

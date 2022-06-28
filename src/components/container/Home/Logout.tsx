@@ -1,5 +1,4 @@
 import { useHistory } from "react-router-dom";
-
 import Button from "@mui/material/Button";
 
 import useStyles from "./style";
