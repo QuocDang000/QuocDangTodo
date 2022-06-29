@@ -1,44 +1,20 @@
-import { Box, Button, CircularProgress, Grid, Stack } from "@mui/material";
-import { TextField } from "@mui/material";
-// import OutlinedInput from "@mui/material/OutlinedInput";
-// import InputAdornment from "@mui/material/InputAdornment";
-// import IconButton from "@mui/material/IconButton";
-// import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import useStyles from "./styles";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { getApi } from "./until";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-// import { LoadingButton } from '@mui/lab';
-import { Formik, Form, Field, useFormik } from "formik";
-import React from "react";
+
+import { Box, Button, CircularProgress, Grid } from "@mui/material";
+import { TextField } from "@mui/material";
+
+import { useFormik } from "formik";
 import * as Yup from "yup";
+
+import { getApi } from "./until";
+import useStyles from "./styles";
 
 function Login() {
   const classes = useStyles();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
-  const [error , setError] = useState('')
+  const [error, setError] = useState("");
   let history = useHistory();
-
-  // const handleChangeEmail = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
-  // const handleChangePassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
-  // const handleLogin = async () => {
-  //   console.log("da clock ");
-
-    // setChecked(true);
-    // const response = await getApi(email, password);
-    // console.log("response file index", response);
-    // localStorage.setItem("token", response);
-    // history.push("/home");
-  // };
 
   const formik = useFormik({
     initialValues: {
@@ -56,13 +32,10 @@ function Login() {
         const response = await getApi(values.email, values.password);
         localStorage.setItem("token", response);
         console.log("response file index", response);
-        // console.log("erros", response.request.status);
         history.push("/home");
       } catch (error) {
-        // console.log('error', error.response.data)
         setError(error.response.data);
       }
-
     },
   });
 
@@ -91,7 +64,6 @@ function Login() {
             <h3>Sign in</h3>
             <form onSubmit={formik.handleSubmit}>
               <TextField
-                // onChange={() => handleChangeEmail}
                 fullWidth
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
@@ -106,7 +78,6 @@ function Login() {
               <br></br>
 
               <TextField
-                // onChange={() => handleChangePassword}
                 className={classes.passwordInput}
                 onBlur={formik.handleBlur}
                 placeholder="Password"
@@ -120,13 +91,15 @@ function Login() {
                 helperText={formik.touched.password && formik.errors.password}
               />
               <p className={classes.contentPassword}>forgot password ?</p>
-              
-              <div >
-              <Button 
-                className={classes.submitBtn} type="submit" variant="contained" 
+
+              <div>
+                <Button
+                  className={classes.submitBtn}
+                  type="submit"
+                  variant="contained"
                 >
-                {checked ? <CircularProgress /> : "Login"}
-              </Button>
+                  {checked ? <CircularProgress /> : "Login"}
+                </Button>
                 <p className={classes.notiContent}>{error}</p>
               </div>
             </form>
