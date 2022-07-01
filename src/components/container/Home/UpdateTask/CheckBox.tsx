@@ -11,12 +11,10 @@ export default function ControlledCheckbox({ id, status, onUpdatePost }: any) {
   };
 
   return (
-    <div>
-      <Checkbox
-        checked={checked}
-        onChange={handleChangeCheckBox}
-        inputProps={{ "aria-label": "controlled" }}
-      />
-    </div>
+    <Checkbox
+      checked={checked}
+      onChange={handleChangeCheckBox}
+      inputProps={{ "aria-label": "controlled" }}
+    />
   );
 }

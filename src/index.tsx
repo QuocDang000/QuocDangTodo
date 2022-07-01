@@ -1,6 +1,5 @@
 import { Provider } from "react-redux";
 import ReactDOM from "react-dom";
-
 import { Box } from "@mui/material";
 
 import App from "./App";

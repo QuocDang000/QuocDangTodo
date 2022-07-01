@@ -16,6 +16,12 @@ export const UPDATE_TASK_REQUEST = "UPDATE_TASK_REQUEST";
 export const UPDATE_TASK_SUCCESS = "UPDATE_TASK_SUCCESS";
 export const UPDATE_TASK_ERROR = "UPDATE_TASK_ERROR";
 
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+
+
+
 export const fetchTask = (action: any) => {
   const { itemNumber, pageCount } = action;
 
@@ -120,6 +126,31 @@ export const updateTask = (id: any, status: any) => {
     } catch (error) {
       dispatch({
         type: UPDATE_TASK_ERROR,
+        payload: error,
+      });
+    }
+  };
+};
+
+export const fetchData = (email: any, password: any) => {
+  return async (dispatch: any) => {
+    dispatch({ type: LOGIN_REQUEST });
+    try {
+      const res = await axios.post(
+        "https://api-nodejs-todolist.herokuapp.com/user/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
+      localStorage.setItem("token", res.data.token);
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data.token,
+      });
+    } catch (error) {
+      dispatch({
+        type: LOGIN_ERROR,
         payload: error,
       });
     }

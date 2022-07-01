@@ -16,7 +16,7 @@ export default function TodoList({
   return (
     <ul>
       <div className={classes.li}>
-        {posts.map((post, index) =>
+        {posts?.map((post, index) =>
           checked ? (
             <Skeleton variant="text" />
           ) : (

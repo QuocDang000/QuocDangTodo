@@ -12,7 +12,7 @@ function AddTask({ onAddTask, task }: any) {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [checked, setChecked] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const todoList = useSelector(todoListSelector);
 

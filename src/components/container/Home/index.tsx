@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
-
-import { connect, useDispatch, useSelector } from "react-redux";
-
+import { connect, useSelector } from "react-redux";
 import { Box, TextField, TablePagination } from "@mui/material";
 
 import Loading from "./Loading";
 import AddTask from "./Add/AddTask";
-
-import useStyles from "./style";
 import { Header } from "../../Header/Header";
 import TodoList from "../../TodoList/TodoList";
 import {
@@ -17,14 +13,15 @@ import {
   updateTask,
 } from "../../../redux/actions/actions";
 
+import useStyles from "./style";
+
 function HomePage({ GetUsers, AddTasks, DeleteTasks, UpdateTasks }) {
-  const dispatch = useDispatch();
   const classes = useStyles();
   const [pageCount, setPageCount] = useState(1);
   const [itemNumber, setItemNumber] = useState(10);
   const [task, setTask] = useState("");
   const [isAdd, setIsAdd] = useState(false);
-  const posts = useSelector((state: any) => state?.task);
+  const posts = useSelector((state: any) => state?.task || []);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -108,10 +105,8 @@ function HomePage({ GetUsers, AddTasks, DeleteTasks, UpdateTasks }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  // todoList: state.todoList
-});
-
+const mapStateToProps = (state: any) => ({ 
+})
 const mapDispacthToProps = (dispatch: any) => {
   return {
     GetUsers: (action: any) => dispatch(fetchTask(action)),

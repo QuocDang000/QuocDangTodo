@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import { connect, useSelector } from "react-redux";
 import { Box, Button, CircularProgress, Grid } from "@mui/material";
 import { TextField } from "@mui/material";
-
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { getApi } from "./until";
-import useStyles from "./styles";
 
-function Login() {
+import useStyles from "./styles";
+import { fetchData } from "../../redux/actions/actions";
+
+function Login({ GetData }) {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
   const [error, setError] = useState("");
@@ -25,17 +26,22 @@ function Login() {
       email: Yup.string().email().min(7).max(255).required(),
       password: Yup.string().min(7).max(255).required(),
     }),
-    onSubmit: async (values) => {
-      setChecked(true);
+    // onSubmit: async (values) => {
+    //   setChecked(true);
+    //   try {
+    //     const response = await getApi(values.email, values.password);
+    //     localStorage.setItem("token", response);
+    //     history.push("/home");
+    //     // GetData(values.email, values.password)
+    //   } catch (error) {
+    //     setError(error.response.data);
+    //   }
+    // },
 
-      try {
-        const response = await getApi(values.email, values.password);
-        localStorage.setItem("token", response);
-        console.log("response file index", response);
-        history.push("/home");
-      } catch (error) {
-        setError(error.response.data);
-      }
+    onSubmit: (values) => {
+      setChecked(true);
+      GetData(values.email, values.password);
+      history.push("/home");
     },
   });
 
@@ -109,5 +115,13 @@ function Login() {
     </div>
   );
 }
+const mapStateToProps = () => ({});
 
-export default Login;
+const mapDispacthToProps = (dispatch: any) => {
+  return {
+    GetData: (email: any, password: any) =>
+      dispatch(fetchData(email, password)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispacthToProps)(Login);

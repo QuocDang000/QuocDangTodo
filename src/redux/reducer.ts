@@ -2,12 +2,19 @@ import {
   ADD_TASK_ERROR,
   ADD_TASK_REQUEST,
   ADD_TASK_SUCCESS,
+
   DELETE_TASK_ERROR,
   DELETE_TASK_REQUEST,
   DELETE_TASK_SUCCESS,
+
   FETCH_TASK_ERROR,
   FETCH_TASK_REQUEST,
   FETCH_TASK_SUCCESS,
+
+  LOGIN_ERROR,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  
   UPDATE_TASK_ERROR,
   UPDATE_TASK_REQUEST,
   UPDATE_TASK_SUCCESS,
@@ -16,11 +23,10 @@ import {
 const initialState = {
   todoList: [],
   checked: true,
+  error: "",
 };
 
 const rootReducer = (state = initialState, action: any) => {
-  console.log("action", action);
-
   switch (action.type) {
     case FETCH_TASK_REQUEST:
       return {
@@ -36,7 +42,7 @@ const rootReducer = (state = initialState, action: any) => {
     case FETCH_TASK_ERROR:
       return {
         ...state,
-        todoList: { err: action.payload },
+        error: action.payload,
         checked: false,
       };
 
@@ -54,7 +60,7 @@ const rootReducer = (state = initialState, action: any) => {
     case ADD_TASK_ERROR:
       return {
         ...state,
-        todoList: { err: action.payload },
+        error: action.payload,
         checked: false,
       };
 
@@ -72,7 +78,7 @@ const rootReducer = (state = initialState, action: any) => {
     case DELETE_TASK_ERROR:
       return {
         ...state,
-        todoList: { err: action.payload },
+        error: action.payload,
         checked: false,
       };
 
@@ -91,11 +97,27 @@ const rootReducer = (state = initialState, action: any) => {
         ),
         checked: false,
       };
-
     case UPDATE_TASK_ERROR:
       return {
         ...state,
-        todoList: { err: action.payload },
+        error: action.payload,
+        checked: false,
+      };
+
+    case LOGIN_REQUEST:
+      return {
+        ...state,
+        checked: true,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        checked: true,
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        error: action.payload,
         checked: false,
       };
 
