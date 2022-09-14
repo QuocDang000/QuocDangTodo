@@ -27,7 +27,7 @@ function App() {
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <Switch>
-            <Route path="/login">
+            <Route path="/">
               <Login />
             </Route>
             <Route exact path="/home">
